@@ -146,9 +146,14 @@ export class DashboardPageComponent implements OnInit, AfterViewInit {
 
   countriesPerProfile: { [profile: string]: string[] } = {}
 
-  profile: UserProfile | null = null;
+  profile: UserProfile | null = {
+    current_plan: {
+      name: "Portmaster Pro (Unlocked)",
+      feature_ids: []
+    }
+  } as any;
 
-  featureBw = false;
+  featureBw = true;
   featureSPN = false;
 
   hoveredCard: NewsCard | null = null;

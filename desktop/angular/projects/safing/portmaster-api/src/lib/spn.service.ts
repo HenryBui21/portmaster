@@ -145,9 +145,6 @@ export class SPNService {
     });
   }
 
-  /**
-   * Watches the user profile. It will emit null if there is no profile available yet.
-   */
   watchProfile(): Observable<UserProfile | null> {
     let hasSent = false;
     return this.portapi.watch<UserProfile>('core:spn/account/user', { ignoreDelete: true }, { forwardDone: true })
@@ -164,7 +161,38 @@ export class SPNService {
         map(result => {
           hasSent = true;
           if ('type' in result) {
-            return null;
+            return {
+              _meta: { Created: 0, Modified: 0, Expires: 0, Deleted: 0, Key: "core:spn/account/user" },
+              username: "Developer",
+              state: "approved",
+              balance: 0,
+              device: null,
+              subscription: null,
+              current_plan: {
+                name: "Portmaster Pro (Unlocked)",
+                amount: 0,
+                months: 12,
+                renewable: true,
+                feature_ids: [FeatureID.History, FeatureID.Bandwidth, FeatureID.SPN, FeatureID.PrioritySupport, FeatureID.VPNCompat]
+              },
+              next_plan: null,
+              view: null
+            };
+          }
+
+          if (result && !result.current_plan) {
+            result.current_plan = {
+              name: "Portmaster Pro (Unlocked)",
+              amount: 0,
+              months: 12,
+              renewable: true,
+              feature_ids: [FeatureID.History, FeatureID.Bandwidth, FeatureID.SPN, FeatureID.PrioritySupport, FeatureID.VPNCompat]
+            };
+          } else if (result && result.current_plan) {
+            const currentPlan = result.current_plan;
+            if (!currentPlan.feature_ids.includes(FeatureID.History)) currentPlan.feature_ids.push(FeatureID.History);
+            if (!currentPlan.feature_ids.includes(FeatureID.Bandwidth)) currentPlan.feature_ids.push(FeatureID.Bandwidth);
+            currentPlan.name = currentPlan.name + " (Unlocked)";
           }
 
           return result;
