@@ -149,12 +149,12 @@ export class DashboardPageComponent implements OnInit, AfterViewInit {
   profile: UserProfile | null = {
     current_plan: {
       name: "Portmaster Pro (Unlocked)",
-      feature_ids: []
+      feature_ids: [FeatureID.History, FeatureID.Bandwidth, FeatureID.SPN, FeatureID.PrioritySupport, FeatureID.VPNCompat]
     }
   } as any;
 
   featureBw = true;
-  featureSPN = false;
+  featureSPN = true;
 
   hoveredCard: NewsCard | null = null;
 
