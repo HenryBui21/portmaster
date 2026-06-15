@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpResponse } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of } from "rxjs";
-import { filter, map, share, switchMap } from "rxjs/operators";
+import { filter, map, share, switchMap, shareReplay } from "rxjs/operators";
 import { FeatureID } from "./features";
 import { PORTMASTER_HTTP_API_ENDPOINT, PortapiService } from './portapi.service';
 import { Feature, Pin, SPNStatus, UserProfile } from "./spn.types";
@@ -14,9 +14,14 @@ export class SPNService {
 
   profile$ = this.watchProfile()
     .pipe(
-      share({ connector: () => new BehaviorSubject<UserProfile | null | undefined>(undefined) }),
+      share({
+        connector: () => new BehaviorSubject<UserProfile | null | undefined>(undefined),
+        resetOnRefCountZero: false
+      }),
       filter(val => val !== undefined)
     ) as Observable<UserProfile | null>;
+
+  private featuresCache$: Observable<(Feature & { enabled: boolean })[]> | null = null;
 
   private pins$: Observable<Pin[]>;
 
@@ -94,26 +99,30 @@ export class SPNService {
   }
 
   watchEnabledFeatures(): Observable<(Feature & { enabled: boolean })[]> {
-    return this.profile$
-      .pipe(
-        switchMap(profile => {
-          return this.loadFeaturePackages()
-            .pipe(
-              map(features => {
-                return features.map(feature => {
-                  // console.log(feature, profile?.current_plan?.feature_ids)
-                  return {
-                    ...feature,
-                    enabled: feature.RequiredFeatureID === FeatureID.None ||
-                      feature.ID === 'history' ||
-                      feature.ID === 'bw-vis' ||
-                      profile?.current_plan?.feature_ids?.includes(feature.RequiredFeatureID) || false,
-                  }
+    if (!this.featuresCache$) {
+      this.featuresCache$ = this.profile$
+        .pipe(
+          switchMap(profile => {
+            return this.loadFeaturePackages()
+              .pipe(
+                map(features => {
+                  return features.map(feature => {
+                    // console.log(feature, profile?.current_plan?.feature_ids)
+                    return {
+                      ...feature,
+                      enabled: feature.RequiredFeatureID === FeatureID.None ||
+                        feature.ID === 'history' ||
+                        feature.ID === 'bw-vis' ||
+                        profile?.current_plan?.feature_ids?.includes(feature.RequiredFeatureID) || false,
+                    }
+                  })
                 })
-              })
-            )
-        })
-      );
+              )
+          }),
+          shareReplay(1)
+        );
+    }
+    return this.featuresCache$;
   }
 
   /** Returns a list of all feature packages */
