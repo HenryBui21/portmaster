@@ -104,7 +104,10 @@ export class SPNService {
                   // console.log(feature, profile?.current_plan?.feature_ids)
                   return {
                     ...feature,
-                    enabled: feature.RequiredFeatureID === FeatureID.None || profile?.current_plan?.feature_ids?.includes(feature.RequiredFeatureID) || false,
+                    enabled: feature.RequiredFeatureID === FeatureID.None ||
+                      feature.ID === 'history' ||
+                      feature.ID === 'bw-vis' ||
+                      profile?.current_plan?.feature_ids?.includes(feature.RequiredFeatureID) || false,
                   }
                 })
               })

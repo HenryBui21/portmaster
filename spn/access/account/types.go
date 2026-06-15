@@ -79,6 +79,9 @@ func (u *User) MayUsePrioritySupport() bool {
 // the given feature ID.
 // Leave feature ID empty to check without feature.
 func (u *User) MayUse(featureID FeatureID) bool {
+	if featureID == FeatureHistory || featureID == FeatureBWVis {
+		return true
+	}
 	switch {
 	case u == nil:
 		// We need a user, obviously.

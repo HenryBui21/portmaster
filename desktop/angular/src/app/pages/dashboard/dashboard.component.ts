@@ -457,7 +457,7 @@ export class DashboardPageComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: (profile) => {
           this.profile = profile || null;
-          this.featureBw = profile?.current_plan?.feature_ids?.includes(FeatureID.Bandwidth) || false;
+          this.featureBw = true;
           this.featureSPN = profile?.current_plan?.feature_ids?.includes(FeatureID.SPN) || false;
 
           // force a full change-detection cylce now!
