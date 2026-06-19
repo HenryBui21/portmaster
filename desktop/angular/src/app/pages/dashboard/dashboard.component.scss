@@ -164,3 +164,18 @@ app-dashboard-widget {
     @apply text-xl text-blue;
   }
 }
+
+:host-context(.theme-light) {
+  ::ng-deep #dashboard-map {
+    #world-group {
+      --map-bg: #f3f4f6;
+      --map-country-active: #d1d5db;
+      --map-country-inactive: #e5e7eb;
+      --map-country-border-color: #e5e7eb;
+      --map-country-border-color-selected: #4b5563;
+      --map-country-blocked-primary: #9ca3af;
+      --map-country-blocked-secondary: #fca5a5;
+    }
+  }
+}
+

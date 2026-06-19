@@ -3,7 +3,7 @@
 markdown {
   width: 100%;
   @apply p-2;
-  color: white !important;
+  color: var(--text-primary) !important;
   @apply font-normal;
 
   details {

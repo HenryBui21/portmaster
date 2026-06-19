@@ -9,18 +9,18 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      white: "#ffffff",
-      background: "#121213",
+      white: "var(--white)",
+      background: "var(--background)",
 
       gray: {
-        100: "#131111",
-        200: "#1b1b1b",
-        300: "#222222",
-        400: "#2c2c2c",
-        500: "#474747",
-        600: "#888888",
-        700: "#ababab",
-        DEFAULT: "#ababab",
+        100: "var(--gray-100)",
+        200: "var(--gray-200)",
+        300: "var(--gray-300)",
+        400: "var(--gray-400)",
+        500: "var(--gray-500)",
+        600: "var(--gray-600)",
+        700: "var(--gray-700)",
+        DEFAULT: "var(--gray-700)",
       },
 
       green: {
@@ -100,9 +100,9 @@ module.exports = {
     },
     textColor: (theme) => {
       return {
-        primary: theme("colors.white"),
-        secondary: theme("colors.gray.700"),
-        tertiary: theme("colors.gray.600"),
+        primary: "var(--text-primary)",
+        secondary: "var(--text-secondary)",
+        tertiary: "var(--text-tertiary)",
 
         ...theme("colors"),
       };

@@ -315,7 +315,8 @@ export class CircularBarChartComponent<T> implements OnInit, AfterViewInit {
       .join("g")
       .attr("fill", "none")
       .call(g => g.append("circle")
-        .attr("stroke", "#fff")
+        .attr("stroke", "currentColor")
+        .attr("class", "text-secondary")
         .attr("stroke-opacity", 0.25)
         .attr("r", y))
       .call(g => g.append("text")
@@ -346,7 +347,8 @@ export class CircularBarChartComponent<T> implements OnInit, AfterViewInit {
         .attr("x", 12)
         .attr("y", 4)
         .attr("font-size", "0.6rem")
-        .attr("fill", "#fff")
+        .attr("fill", "currentColor")
+        .attr("class", "text-secondary")
         .text(d => {
           if (!!this.config?.seriesLabel) {
             return this.config.seriesLabel(d)

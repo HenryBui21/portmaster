@@ -88,7 +88,7 @@
       &.app,
       &.help,
       &.settings {
-        @apply text-white;
+        @apply text-primary;
         width: 1.1rem;
         position: relative;
         stroke: currentColor;
