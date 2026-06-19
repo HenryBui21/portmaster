@@ -68,6 +68,8 @@ export class NavigationComponent implements OnInit {
   /** Whether or not the SPN is currently enabled */
   spnEnabled = false;
 
+  currentTheme: 'light' | 'dark' = 'dark';
+
   @Output()
   sideDashChange = new EventEmitter<'collapsed' | 'expanded' | 'force-overlay'>();
 
@@ -97,6 +99,9 @@ export class NavigationComponent implements OnInit {
   ]
 
   ngOnInit() {
+    this.currentTheme = (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
+    this.applyTheme(this.currentTheme);
+
     const mql = window.matchMedia('(max-width: 1200px)');
 
     if (mql.matches) {
@@ -375,5 +380,23 @@ export class NavigationComponent implements OnInit {
           this.actionIndicator.error('Failed loading debug data', err);
         }
       )
+  }
+
+  applyTheme(theme: 'light' | 'dark') {
+    if (theme === 'light') {
+      document.documentElement.classList.add('theme-light');
+    } else {
+      document.documentElement.classList.remove('theme-light');
+    }
+  }
+
+  toggleTheme(event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', this.currentTheme);
+    this.applyTheme(this.currentTheme);
   }
 }

@@ -44,3 +44,43 @@
   --portmaster-plus: #2fcfae;
   --portmaster-pro: #029ad0;
 }
+
+:root.theme-light {
+  --background: #f3f4f6;
+
+  --text-primary  : #111827;
+  --text-secondary: #374151;
+  --text-tertiary : #6b7280;
+
+  --cards-primary      : #ffffff;
+  --cards-secondary    : #f9fafb;
+  --cards-secondary-rgb: 249, 250, 251;
+  --cards-tertiary     : #e5e7eb;
+
+  --button-icon : #4b5563;
+  --button-dark : #e5e7eb;
+  --button-light: #d1d5db;
+
+  --info-green     : #10b981;
+  --info-red       : #ef4444;
+  --info-gray      : #6b7280;
+  --info-blue      : #3b82f6;
+  --info-yellow    : #d97706;
+  --info-yellow-rgb: 217, 119, 6;
+
+  --protection-ok-primary  : rgb(16, 185, 129);
+  --protection-ok-secondary: rgb(4, 120, 87);
+  --protection-ok-tertiary : rgb(209, 250, 229);
+
+  --protection-warn-primary  : rgb(245, 158, 11);
+  --protection-warn-secondary: rgb(180, 83, 9);
+  --protection-warn-tertiary : rgb(254, 243, 199);
+
+  --protection-fail-primary  : rgb(239, 68, 68);
+  --protection-fail-secondary: rgb(185, 28, 28);
+  --protection-fail-tertiary : rgb(254, 226, 226);
+
+  --portmaster-plus: #0d9488;
+  --portmaster-pro: #0284c7;
+}
+
