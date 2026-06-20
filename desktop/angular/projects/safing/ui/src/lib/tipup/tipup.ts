@@ -183,8 +183,8 @@ export class SfngsfngTipUpTriggerDirective implements OnDestroy {
     [sfngTipUpButtons]="buttons"
     [sfngTipUpAnchorRef]="anchor">
     <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" >
-      <path stroke="#ffff" shape-rendering="geometricPrecision" d="M12 21v0c-4.971 0-9-4.029-9-9v0c0-4.971 4.029-9 9-9v0c4.971 0 9 4.029 9 9v0c0 4.971-4.029 9-9 9z"/>
-      <path stroke="#ffff" shape-rendering="geometricPrecision" d="M12 17v-5h-1M11.749 8c-.138 0-.25.112-.249.25 0 .138.112.25.25.25s.25-.112.25-.25-.112-.25-.251-.25"/>
+      <path stroke="currentColor" shape-rendering="geometricPrecision" d="M12 21v0c-4.971 0-9-4.029-9-9v0c0-4.971 4.029-9 9-9v0c4.971 0 9 4.029 9 9v0c0 4.971-4.029 9-9 9z"/>
+      <path stroke="currentColor" shape-rendering="geometricPrecision" d="M12 17v-5h-1M11.749 8c-.138 0-.25.112-.249.25 0 .138.112.25.25.25s.25-.112.25-.25-.112-.25-.251-.25"/>
     </g>
   </svg>`,
   styles: [

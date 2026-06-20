@@ -62,7 +62,7 @@
 
     &:target,
     &.active {
-      background-color: #2c2c2c;
+      background-color: var(--cards-tertiary);
 
       svg,
       fa-icon {
@@ -95,4 +95,9 @@
       }
     }
   }
+
+  sfng-tipup {
+    @apply text-primary;
+  }
 }
+
